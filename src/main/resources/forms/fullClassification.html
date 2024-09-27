@@ -1,0 +1,195 @@
+<div>
+	<fieldset>
+		<legend>Person data</legend>
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" class="form-control" value="" required />
+		</div>
+		<div class="form-group">
+			<label for="passport_number">Passport number</label>
+			<input type="text" id="passport_number" name="passport_number" class="form-control" value="" required />
+		</div>
+		<div class="form-group">
+			<label for="nationality">Nationality</label>
+			<!-- <input type="dropdown" id="nationality" name="nationality" class="form-control" value="" /> -->
+			<select id="nationality" name="nationality" class="form-control" required >
+				<option value=""></option>
+				<option value="THA">THA</option>
+				<option value="BHU">BHU</option>
+				<option value="MY">MY</option>
+				<option value="SG">SG</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="dob">Dob</label>
+			<input type="date" id="dob" name="dob" class="form-control" value="" required />
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Question data</legend>
+		<div class="form-group">
+			<label for="question1">Question 1</label><br>
+			<input type="radio" id="question1" name="question1" value="Y" />
+			<label for="question1">Yes</label><br>
+			<input type="radio" id="question1" name="question1" value="N" checked='checked'/>
+			<label for="question1">No</label><br>
+		</div>
+		<div class="form-group">
+			<label for="question2">Question 2</label><br>
+			<input type="radio" id="question2" name="question2" value="Y" />
+			<label for="question2">Yes</label><br>
+			<input type="radio" id="question2" name="question2" value="N" checked='checked'/>
+			<label for="question2">No</label><br>
+		</div>
+		<div class="form-group">
+			<label for="question3">Question 3</label><br>
+			<input type="radio" id="question3" name="question3" value="Y" />
+			<label for="question3">Yes</label><br>
+			<input type="radio" id="question3" name="question3" value="N" checked='checked'/>
+			<label for="question3">No</label><br>
+		</div>
+		<div class="form-group">
+			<label for="question4">Question 4</label><br>
+			<input type="radio" id="question4" name="question4" value="Y" />
+			<label for="question4">Yes</label><br>
+			<input type="radio" id="question4" name="question4" value="N" checked='checked'/>
+			<label for="question4">No</label><br>
+		</div>
+	</fieldset>
+	<script>
+		console.log("Full Classification...");
+		/* Utility function that fills the form with the data received from the kogito runtime */
+		function setFormData(data) {
+			console.log("setFormData");
+			if (!data) {
+				return;
+			}
+			document.getElementById("name").value = data?.name ?? "";
+			document.getElementById("passport_number").value = data?.passport_number ?? "";
+			document.getElementById("nationality").value = data?.nationality ?? "";
+			document.getElementById("dob").value = data?.dob ?? "";
+			// document.getElementById("question1").value = data?.question1 ?? "";
+			// document.getElementById("question2").value = data?.question2 ?? "";
+			// document.getElementById("question3").value = data?.question3 ?? "";
+		}
+		/* Utility function to generate the expected form output as a json object */
+		function getFormData() {
+			console.log("getFormData");
+			const formData = {};
+
+			let name = document.getElementById("name").value;
+			if (name == "") {
+				alert("Name must be filled out");
+				return formApi;
+			}
+			
+			formData.name = document.getElementById("name").value;
+			formData.passport_number = document.getElementById("passport_number").value;
+			formData.nationality = document.getElementById("nationality").value;
+			formData.dob = document.getElementById("dob").value;
+
+			// const question = ['question1', 'question2', 'question3'];
+			// question.forEach((element) => {
+			// 	var element = document.getElementsByName(element);
+			// 	for (var i = 0, length = element.length; i < length; i++) {
+			// 		if (element[i].checked) {
+						// var question1Ans = element[i].value;
+			// 			break;
+			// 		}
+			// 	}
+			// });
+
+			var question1 = document.getElementsByName('question1');
+			for (var i = 0, length = question1.length; i < length; i++) {
+				if (question1[i].checked) {
+					var question1Ans = question1[i].value;
+					break;
+				}
+			}
+
+			var question2 = document.getElementsByName('question2');
+			for (var i = 0, length = question2.length; i < length; i++) {
+				if (question2[i].checked) {
+					var question2Ans = question2[i].value;
+					break;
+				}
+			}
+
+			var question3 = document.getElementsByName('question3');
+			for (var i = 0, length = question3.length; i < length; i++) {
+				if (question3[i].checked) {
+					var question3Ans = question3[i].value;
+					break;
+				}
+			}
+
+			var question4 = document.getElementsByName('question4');
+			for (var i = 0, length = question4.length; i < length; i++) {
+				if (question4[i].checked) {
+					var question4Ans = question4[i].value;
+					break;
+				}
+			}
+
+			const passport = {
+					"passport_number": formData.passport_number,
+					"nationality": formData.nationality
+			};
+
+			const person = {
+				"name": formData.name,
+				"passport": passport,
+				"dob": formData.dob
+			};
+
+			const data = {"person": person, "name": formData.name, "nationality": formData.nationality, "Q1": question1Ans, "Q2": question2Ans, "Q3": question3Ans, "Q4": question4Ans};
+
+			console.log(person);
+			console.log(typeof data);
+
+			return data;
+			// return formData;
+		}
+
+		/* Utility function to validate the form on the 'beforeSubmit' Lifecycle Hook */
+		function validateForm() {
+			console.log("validateForm");
+		}
+		/*
+            Call to the Kogito console form engine. It will establish the connection with the console embeding the form
+            and return an instance of FormAPI that will allow hook custom code into the form lifecycle.
+            The `window.Form.openForm` call expects an object with the following entries:
+                - onOpen: Callback that will be called after the connection with the console is established. The callback
+                will receive the following arguments:
+                    - data: the data to be bound into the form
+                    - ctx: info about the context where the form is being displayed. This will contain information such as the form JSON Schema, process/task, user...
+        */
+		const formApi = window.Form.openForm({
+			onOpen: (data, context) => {
+				console.log("onOpening");
+				setFormData(data);
+			},
+		});
+		/*
+            Form Lifecycle Hook that will be executed before the form is submitted.
+            Throwing an error will stop the form submit. Usually should be used to validate the form.
+        */
+		formApi.beforeSubmit = () => {
+			console.log("beforeSubmit");
+			validateForm();
+		};
+		/*
+            Form Lifecycle Hook that will be executed after the form is submitted.
+            It will receive a response object containing the `type` flag indicating if the submit has been successful and `info` with extra information about the submit result.
+        */
+		formApi.afterSubmit = (response) => {
+			console.log("afterSubmit");
+		};
+		/* Generates the expected form output object to be posted */
+		formApi.getFormData = () => getFormData();
+
+		console.log("Printing formApi Data ... ");
+		console.log(formApi.getFormData);
+
+	</script>
+</div>

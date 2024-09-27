@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_0DCC505E-71B4-4C29-8848-4006623FE51A" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_14645A68-5630-4A6F-899F-4FF825252CCD" name="Classification Logic" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_0DCC505E-71B4-4C29-8848-4006623FE51A">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_3E1E40E9-9152-4C91-A4B3-8EB9E2652491" name="VExternal" isCollection="false">
+    <dmn:itemComponent id="_18133296-C0CD-4042-A75B-2D08EC005C04" name="addition_num" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_0BE55817-C2BB-4014-BE4B-5F273440846F" name="e_valid_till" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_B61F4FD0-702A-4B9C-8548-BDC029FD9C7E" name="e_num" isCollection="false">
+      <dmn:typeRef>Any</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_68F0BCF3-8193-4278-B5F4-640DA4176C7D" name="e_type" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_AA39060D-21DF-4ED1-A21E-10FC0F0BCE56" name="src" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_1529C5DD-EF23-4073-A169-60A865702DAA" name="p_type" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_D37BA776-FB19-4890-9DA9-0AED31541E6E">
+      <dmn:text>"V1", "R1", "default"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_8F53A805-6BDD-4A3C-B346-5A63F301AFED" name="srcDataType" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_8674C08B-C4B6-418E-B258-F5CFB3F723AA">
+      <dmn:text>"v", "r"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_6839F004-7736-4279-AF92-CBBA863333B8" name="result" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_B61662E0-6C23-4B84-8E20-A1235030A7C6">
+      <dmn:text>"Continue", "Discard"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_6072C82E-CFEA-4BB5-BAD0-5AB181A19CF0" name="RExternal" isCollection="false">
+    <dmn:itemComponent id="_15EDCBAF-C864-4AAF-B980-E8331950D672" name="r_is_valid" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_E9AD7786-6F13-43D5-904D-4CE9E1C90D2A" name="r_num" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_09FF116F-F6E2-4876-A121-2EA0675FA13C" name="src" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:decision id="_46B5632F-AE59-4433-92DF-68A02E2CD340" name="V decision">
+    <dmn:extensionElements/>
+    <dmn:variable id="_91287852-CEF9-4E3C-9F92-9F7E13033A6B" name="V decision" typeRef="string"/>
+    <dmn:informationRequirement id="_7B86A0E7-8F89-49E1-AB3F-92C5C407CABB">
+      <dmn:requiredInput href="#_F4848E59-D3E1-4DD8-8762-FF14A2066D23"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_DD9F0FD7-92DB-4C0B-BF75-85DE5166821A" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_51EABBBD-420A-401F-B914-D5D61FB968F1">
+        <dmn:inputExpression id="_F26430F5-F69B-43FE-B168-E74A83214694" typeRef="string">
+          <dmn:text>VExternal.e_valid_till</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_6D3CC5D9-58AB-4AAB-83CF-2CBE58518F15">
+        <dmn:inputExpression id="_445CF104-7232-4FFF-AB66-B27212027F96" typeRef="string">
+          <dmn:text>VExternal.src</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_3C933EC8-88DA-4AF6-A4C1-A87D5E3B544E">
+        <dmn:outputValues kie:constraintType="enumeration" id="_6E489FDA-1B83-4AA9-97CC-3E1753736177">
+          <dmn:text>"Continue", "Discard"</dmn:text>
+        </dmn:outputValues>
+      </dmn:output>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_93B26521-4C0E-48F4-8112-16F5296FBBE8">
+        <dmn:inputEntry id="_622521E7-E5BD-4C1E-927C-BE9616C19AA0">
+          <dmn:text>"Discard"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E7D15BC8-515B-4487-B270-697F59F6F911">
+          <dmn:text>"v"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_7F072458-FE2E-4773-868E-2C7CE4CAFDB9">
+          <dmn:text>"Discard"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_0925C2DE-4ADF-4C57-9311-C973D2FB0D8C">
+        <dmn:inputEntry id="_66253C47-01D0-49E9-9286-99C33B7D2EF8">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_31AD0360-332A-46DF-9238-518EE0A52C2C">
+          <dmn:text>"v"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B735C8F3-6E74-41FD-93C7-127955BFC425">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_FD38F3B7-2D84-4ABC-9847-525834B90FAA" name="Final P type">
+    <dmn:extensionElements/>
+    <dmn:variable id="_9C099C7C-972A-4701-A334-0105E489A502" name="Final P type" typeRef="p_type"/>
+    <dmn:informationRequirement id="_C6FD9F5C-1189-4249-814F-EFE8DC92C1C5">
+      <dmn:requiredDecision href="#_46B5632F-AE59-4433-92DF-68A02E2CD340"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_D82DE278-F8ED-4F6F-AFEC-6B7C997F51B1">
+      <dmn:requiredDecision href="#_1BE5E264-2647-4DAF-8E93-8A64054F2510"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_16AB8342-A3FD-4D85-8723-344C0BB5B605" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_E84BEF5E-675E-4FDA-8F58-77A35CB6928C">
+        <dmn:inputExpression id="_74A41D0B-0E7C-49E1-A484-E4C36AE768E1" typeRef="string">
+          <dmn:text>R decision</dmn:text>
+        </dmn:inputExpression>
+        <dmn:inputValues kie:constraintType="enumeration" id="_B298E205-021D-4CE1-88A0-3D1AC4CB0FBF">
+          <dmn:text>"Continue", "Discard"</dmn:text>
+        </dmn:inputValues>
+      </dmn:input>
+      <dmn:input id="_56FBD59A-81F2-4376-A57B-887625166755">
+        <dmn:inputExpression id="_4AD13652-86C9-408A-AC73-64C599EDDD02" typeRef="string">
+          <dmn:text>V decision</dmn:text>
+        </dmn:inputExpression>
+        <dmn:inputValues kie:constraintType="enumeration" id="_AD3CC2A4-162C-4B0C-AEAE-7835CB8C4129">
+          <dmn:text>"Continue", "Discard"</dmn:text>
+        </dmn:inputValues>
+      </dmn:input>
+      <dmn:output id="_ADA5E789-1BF4-467A-8A0D-F7D31A08C8B9">
+        <dmn:outputValues kie:constraintType="enumeration" id="_5D0E23B2-A220-4E0D-B228-B0B72158DFD4">
+          <dmn:text>"V1", "R1", "default"</dmn:text>
+        </dmn:outputValues>
+      </dmn:output>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_F557D5E6-620F-4410-991D-D7C17B9423C0">
+        <dmn:inputEntry id="_FE36F280-5B83-43D8-94F8-749093ACC10E">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_7387A592-4440-4CEE-A72D-4E723B280AFE">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_68494115-2D7D-4695-AB48-0BE7620A3D14">
+          <dmn:text>"V1"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_14CF8221-6A5B-4CC4-AC15-491661F9CC9F">
+        <dmn:inputEntry id="_34ECEA2C-47EC-4A4B-BA15-466D538F834B">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_2E11BCE3-5E13-47D6-805F-437BA6810393">
+          <dmn:text>"Discard"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_1D6A82B0-5E18-43FE-93C1-A581A0F39BE2">
+          <dmn:text>"R1"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_C8851141-491F-48C3-8ED0-F740A676D6A6">
+        <dmn:inputEntry id="_0E3667C6-BC83-4ACC-ACCD-F0741077D69D">
+          <dmn:text>"Discard"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E6CE3235-505F-45E2-873D-E3A73CB73970">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B52B9FA3-9FE2-4267-9FC1-E177AF5D992A">
+          <dmn:text>"V1"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_0442FCB9-0FC3-4A2D-967B-4CA4CBAC0BE9">
+        <dmn:inputEntry id="_5445B6A3-B43E-4C11-92B3-22EB924161A5">
+          <dmn:text>"Discard"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_2553BB56-962E-40E7-A79F-A545AC5CBEE7">
+          <dmn:text>"Discard"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_ACFC62E2-35FA-477D-87BC-E3BBB6937364">
+          <dmn:text>"default"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_F59B44AB-03A8-47D4-8072-7CABD6439031">
+        <dmn:inputEntry id="_85149512-91A1-40B1-A087-400FBA86D0FE">
+          <dmn:text>null</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_FB1276F3-C072-45BD-9DA9-C435955FB47F">
+          <dmn:text>null</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_BBE83B33-9D37-4335-A7B1-869F381137F3">
+          <dmn:text>"default"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_8A6758F4-4C3C-48DE-ADC9-608F94BC6436">
+        <dmn:inputEntry id="_7D84C4E7-5375-40DF-ACF2-D86AC87E1174">
+          <dmn:text>null</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_0BFDC4DC-2862-4334-92F0-F929BE582F47">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_5A052BBB-C1E2-477C-9A5A-298C2B3ED94F">
+          <dmn:text>"V1"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_FBCF9376-75CD-4A86-9377-4A54BD38E889">
+        <dmn:inputEntry id="_34016C19-076A-4A4F-8B8B-3CF821519C1D">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_BD35ABA8-D6F5-41B1-85EE-2B2B86402CAC">
+          <dmn:text>null</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_7C254299-8CE7-4211-A4DF-F57F4BACF050">
+          <dmn:text>"R1"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:inputData id="_F4848E59-D3E1-4DD8-8762-FF14A2066D23" name="VExternal">
+    <dmn:extensionElements/>
+    <dmn:variable id="_EA4DC72B-6DAF-4F88-894A-603183BBB140" name="VExternal" typeRef="VExternal"/>
+  </dmn:inputData>
+  <dmn:inputData id="_30D6EF5F-9D56-4360-8C1A-9A0B9AFE056E" name="RExternal">
+    <dmn:extensionElements/>
+    <dmn:variable id="_EC2FFEC4-B16D-4C40-89CA-EE3648A74A0A" name="RExternal" typeRef="RExternal"/>
+  </dmn:inputData>
+  <dmn:decision id="_1BE5E264-2647-4DAF-8E93-8A64054F2510" name="R decision">
+    <dmn:extensionElements/>
+    <dmn:variable id="_872E36E3-01D6-4125-9EB6-89710B76091A" name="R decision" typeRef="string"/>
+    <dmn:informationRequirement id="_5355E233-EA4F-4E6B-8535-C37CD3A54972">
+      <dmn:requiredInput href="#_30D6EF5F-9D56-4360-8C1A-9A0B9AFE056E"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_3C8FC673-6A5D-4330-A57C-4649D09C3752" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_5A53815B-73F6-4C2B-873B-3A6BFBB10686">
+        <dmn:inputExpression id="_479D797E-AEA1-415E-AA68-97F13BA8A68C" typeRef="boolean">
+          <dmn:text>RExternal.r_is_valid</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_A2B31201-F431-4832-8C6E-5528ECB84104">
+        <dmn:inputExpression id="_E4223473-2215-4B6D-81DD-A826692219B6" typeRef="string">
+          <dmn:text>RExternal.src</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_47D84D24-1143-4400-8D80-6AF20B1F37B1">
+        <dmn:outputValues kie:constraintType="enumeration" id="_601F0E1A-F9DA-4DE5-B679-0454A3A4FF18">
+          <dmn:text>"Continue", "Discard"</dmn:text>
+        </dmn:outputValues>
+      </dmn:output>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_775FB895-E397-4AC7-B8C9-2CA447277273">
+        <dmn:inputEntry id="_213BE2CD-B2E0-4CB1-A693-1E1FA38D76FD">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_6E0B6496-A6B4-4AFD-BCB4-081ACECC316F">
+          <dmn:text>"r"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_FEFB2C8F-996C-4ABA-8570-B7AAA0677E47">
+          <dmn:text>"Discard"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_2CEA561C-2C9D-4AEB-8920-40FE86659D38">
+        <dmn:inputEntry id="_0B2996D8-50F7-4B84-A2E3-B54245CA56BA">
+          <dmn:text>true</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_96820AE1-424B-44B1-8040-69B4808BB461">
+          <dmn:text>"r"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_DF7CDAB8-3969-41D8-BAF5-2DB4C3E0D5DE">
+          <dmn:text>"Continue"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_C1A40C3F-E161-41CE-9ED5-BA9F449CF495" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_DD9F0FD7-92DB-4C0B-BF75-85DE5166821A">
+            <kie:width>50</kie:width>
+            <kie:width>169</kie:width>
+            <kie:width>170</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_16AB8342-A3FD-4D85-8723-344C0BB5B605">
+            <kie:width>50</kie:width>
+            <kie:width>107</kie:width>
+            <kie:width>114</kie:width>
+            <kie:width>149</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3C8FC673-6A5D-4330-A57C-4649D09C3752">
+            <kie:width>50</kie:width>
+            <kie:width>175</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_46B5632F-AE59-4433-92DF-68A02E2CD340" dmnElementRef="_46B5632F-AE59-4433-92DF-68A02E2CD340" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="605" y="473" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_FD38F3B7-2D84-4ABC-9847-525834B90FAA" dmnElementRef="_FD38F3B7-2D84-4ABC-9847-525834B90FAA" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="730" y="343" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_F4848E59-D3E1-4DD8-8762-FF14A2066D23" dmnElementRef="_F4848E59-D3E1-4DD8-8762-FF14A2066D23" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="603.5981308411215" y="603" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_30D6EF5F-9D56-4360-8C1A-9A0B9AFE056E" dmnElementRef="_30D6EF5F-9D56-4360-8C1A-9A0B9AFE056E" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="855" y="603.7004720308169" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_1BE5E264-2647-4DAF-8E93-8A64054F2510" dmnElementRef="_1BE5E264-2647-4DAF-8E93-8A64054F2510" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="855" y="473" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_7B86A0E7-8F89-49E1-AB3F-92C5C407CABB-AUTO-TARGET" dmnElementRef="_7B86A0E7-8F89-49E1-AB3F-92C5C407CABB">
+        <di:waypoint x="653.5981308411215" y="628"/>
+        <di:waypoint x="655" y="523"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C6FD9F5C-1189-4249-814F-EFE8DC92C1C5-AUTO-TARGET" dmnElementRef="_C6FD9F5C-1189-4249-814F-EFE8DC92C1C5">
+        <di:waypoint x="655" y="498"/>
+        <di:waypoint x="780" y="393"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_D82DE278-F8ED-4F6F-AFEC-6B7C997F51B1-AUTO-TARGET" dmnElementRef="_D82DE278-F8ED-4F6F-AFEC-6B7C997F51B1">
+        <di:waypoint x="905" y="498"/>
+        <di:waypoint x="780" y="393"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_5355E233-EA4F-4E6B-8535-C37CD3A54972" dmnElementRef="_5355E233-EA4F-4E6B-8535-C37CD3A54972">
+        <di:waypoint x="905" y="628.7004720308169"/>
+        <di:waypoint x="905" y="498"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+    <dmndi:DMNDiagram id="_6FB7A98D-FF4E-470D-A63D-92C552D7641F" name="new-diagram">
+      <di:extension>
+        <kie:ComponentsWidthsExtension/>
+      </di:extension>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
