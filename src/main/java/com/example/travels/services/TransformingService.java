@@ -31,22 +31,9 @@ import java.text.SimpleDateFormat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItem;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemHandler;
-import org.kie.kogito.internal.process.runtime.KogitoWorkItemManager;
 
 @ApplicationScoped
-public class TransformingService implements KogitoWorkItemHandler {
-
-    @Override
-    public void executeWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
-        System.out.println("Hello from the custom work item definition.");
-        System.out.println("Passed parameters:");
-   }
-    @Override
-    public void abortWorkItem(KogitoWorkItem workItem, KogitoWorkItemManager manager) {
-        System.err.println("Error happened in the custom work item definition.");
-   }
+public class TransformingService {
 
     public VExternal transformingVData(String VExternal) {
         System.out.println("Entering transformingVData ... ");
