@@ -1,4 +1,4 @@
-Hello
+Hello-world
 # bamoe-canvas-quarkus-accelerator
 This is the BAMOE Canvas Quarkus Accelerator for Decisions and Workflows
 
